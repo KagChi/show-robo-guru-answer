@@ -128,10 +128,10 @@ const CTASection = () => {
       )}
       {answerState &&
         answerState.map((x) => (
-          <Flex p={50} w="full" alignItems="center" justifyContent="center">
+          <Flex mt={5} w="full" alignItems="center" justifyContent="center">
             <Box
               mx="auto"
-              px={8}
+              px={2}
               py={4}
               rounded="lg"
               shadow="lg"
@@ -161,10 +161,6 @@ const CTASection = () => {
                     h={10}
                     rounded="full"
                     fit="cover"
-                    display={{
-                      base: 'none',
-                      sm: 'block',
-                    }}
                     src={x.user.photoUrl}
                     alt="avatar"
                   />
