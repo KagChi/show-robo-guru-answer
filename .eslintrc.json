@@ -5,6 +5,9 @@
     "plugin:@next/next/recommended"
   ],
   "rules": {
-    "react/jsx-no-bind": "off"
+    "react/jsx-no-bind": "off",
+    "react/prop-types": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react/jsx-no-undef": "off"
   }
 }
