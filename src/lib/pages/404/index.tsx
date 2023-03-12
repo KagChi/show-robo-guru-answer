@@ -3,8 +3,6 @@ import {
   Button,
   Heading,
   Image,
-  Text,
-  Link as ChakraLink,
   useColorMode,
   Flex,
 } from '@chakra-ui/react';

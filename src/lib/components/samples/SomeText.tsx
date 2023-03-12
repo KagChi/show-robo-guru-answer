@@ -8,7 +8,8 @@ const SomeText = () => {
       </Heading>
 
       <Text fontSize="xs">
-      Tired when looking for roboguru answer required to be logged in? Probably you needs this !
+        Tired when looking for roboguru answer required to be logged in?
+        Probably you needs this !
       </Text>
     </Grid>
   );
