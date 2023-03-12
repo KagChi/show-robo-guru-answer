@@ -1,79 +1,55 @@
-import { Box, Button, Flex, Image, Link } from '@chakra-ui/react';
-import { AiFillGithub } from 'react-icons/ai';
-
-const repoLink = 'https://github.com/sozonome/nextarter-chakra';
+import { FormControl, Input, FormHelperText, Box, Text } from "@chakra-ui/react";
+import { ChangeEvent, useState } from "react";
+import { load } from 'cheerio';
 
 const CTASection = () => {
+  const [answerState, answerUpdate] = useState<string[] | undefined>();
+  const [questionState, questionUpdate] = useState<string | undefined>();
+
+  async function onUserType(
+    data: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
+  ) {
+    const response = await fetch("/api/parse", { method: "POST", body: JSON.stringify({ url: data.target.value }) });
+    if (response.ok) {
+      const jsonResponse = await response.json();
+      questionUpdate(jsonResponse.props.pageProps.cleanContent)
+      answerUpdate(jsonResponse.props.pageProps.forumDetail ? jsonResponse.props.pageProps.forumDetail.items.map(x => x.content) : [jsonResponse.props.pageProps.question.shortAnswer])
+    }
+  }
+
   return (
-    <Box textAlign="center">
-      <Box transform="scale(0.85)">
-        <Flex marginY={4} justifyContent="center" gap={2}>
-          <Link
-            aria-label="Deploy to Vercel"
-            isExternal
-            rel="noopener noreferrer"
-            href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsozonome%2Fnextarter-chakra"
-          >
-            <Image
-              src="https://vercel.com/button"
-              alt="Vercel deploy button"
-              width="92px"
-              height="32px"
+      <Box textAlign="center" marginTop={8}>
+        <Box>
+          <FormControl>
+            <FormHelperText>Roboguru link</FormHelperText>
+            <Input
+              onChange={onUserType}
+              type="text"
+              id="link"
+              boxShadow="md"
+              required
+              autoComplete="off"
+              autoCorrect="off"
             />
-          </Link>
+          </FormControl>
+        </Box>
 
-          <Link
-            aria-label="Deploy to Netlify"
-            isExternal
-            rel="noopener noreferrer"
-            href="https://app.netlify.com/start/deploy?repository=https://github.com/sozonome/nextarter-chakra"
-          >
-            <Image
-              src="https://www.netlify.com/img/deploy/button.svg"
-              alt="Netlify deploy button"
-              height="32px"
-              width="146px"
-            />
-          </Link>
-        </Flex>
+        <br />
+        {questionState && (
+        <Box>
+          <Text>{questionState}</Text>
+        </Box>
+        )}
 
-        <Flex justifyContent="center" marginY={4}>
-          <Link
-            aria-label="Deploy on Railway"
-            isExternal
-            rel="noopener noreferrer"
-            href="https://railway.app/new/template/aqmmai?referralCode=9lKVVo"
-          >
-            <Image
-              src="https://railway.app/button.svg"
-              width="183px"
-              height="40px"
-              alt="Railway deploy button"
-            />
-          </Link>
-        </Flex>
+        <br />
+
+        {answerState && answerState.map(x => (
+          <Box>
+            <Text>{x}</Text>
+          </Box>
+        ))}
+        
       </Box>
-
-      <Flex justifyContent="center" alignItems="center" gap={2}>
-        <Button
-          as="a"
-          href="https://github.com/sozonome/nextarter-chakra/generate"
-          target="_blank"
-          size="sm"
-        >
-          Use This Template
-        </Button>
-        <Button
-          as="a"
-          href={repoLink}
-          target="_blank"
-          leftIcon={<AiFillGithub />}
-          size="sm"
-        >
-          Open in Github
-        </Button>
-      </Flex>
-    </Box>
   );
 };
 

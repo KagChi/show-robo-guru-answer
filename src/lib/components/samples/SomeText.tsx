@@ -3,12 +3,12 @@ import { Grid, Heading, Text } from '@chakra-ui/react';
 const SomeText = () => {
   return (
     <Grid textAlign="center">
-      <Heading as="h1" size="lg">
-        nextarter-chakra
+      <Heading as="h1" size="md">
+        SHOW ROBOGURU ANSWER WITHOUT BEING LOGGED IN
       </Heading>
 
       <Text fontSize="xs">
-        This is a Next.js app with Chakra-UI and TypeScript setup.
+      Tired when looking for roboguru answer required to be logged in? Probably you needs this !
       </Text>
     </Grid>
   );
