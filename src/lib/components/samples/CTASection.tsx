@@ -94,6 +94,7 @@ const CTASection = () => {
         <Stack
           bg={useColorModeValue('gray.50', 'gray.800')}
           py={16}
+          px={2}
           spacing={{ base: 8, md: 10 }}
           align="center"
           direction="column"
@@ -104,14 +105,16 @@ const CTASection = () => {
             maxW="3xl"
           >
             {decode(removeMD(questionState.question))}
+          </Text>
+          <Box textAlign="left">
             {questionState.choices &&
               questionState.choices.map((x, index) => (
-                <Text>
+                <Text fontSize={{ base: 'xl', md: '2xl' }} maxW="3xl">
                   {' '}
                   {String.fromCharCode(index + 1 + 64)}. {decode(removeMD(x))}{' '}
                 </Text>
               ))}
-          </Text>
+          </Box>
           <Box textAlign="center">
             <Avatar src={questionState.user.photoUrl} mb={2} />
 
