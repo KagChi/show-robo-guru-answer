@@ -24,7 +24,9 @@ const CTASection = () => {
       questionUpdate(jsonResponse.props.pageProps.cleanContent);
       answerUpdate(
         jsonResponse.props.pageProps.forumDetail
-          ? jsonResponse.props.pageProps.forumDetail.items.map((x: { content: string }) => x.content)
+          ? jsonResponse.props.pageProps.forumDetail.items.map(
+              (x: { content: string }) => x.content
+            )
           : [jsonResponse.props.pageProps.question.shortAnswer]
       );
     }
