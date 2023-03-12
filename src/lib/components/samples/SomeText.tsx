@@ -11,6 +11,10 @@ const SomeText = () => {
         Tired when looking for roboguru answer required to be logged in?
         Probably you needs this !
       </Text>
+      <Text fontSize="xs">
+        (Page cannot display the right text? sorry it is not easy to parse all
+        things from the original. contributions appreciated.)
+      </Text>
     </Grid>
   );
 };

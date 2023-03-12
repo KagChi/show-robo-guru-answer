@@ -12,6 +12,7 @@ import {
   Image,
   Link,
 } from '@chakra-ui/react';
+import { decode } from 'html-entities';
 import type { ChangeEvent } from 'react';
 import { useState } from 'react';
 import removeMD from 'remove-markdown';
@@ -39,7 +40,8 @@ const CTASection = () => {
             ? props.forumDetail.thread.createdByUser.photoUrl
             : props.question.createdByUser.photoUrl,
         },
-        question: jsonResponse.props.pageProps.cleanContent,
+        choices: props.question?.options ?? [],
+        question: props.cleanContent,
       });
 
       answerUpdate(
@@ -102,7 +104,14 @@ const CTASection = () => {
             textAlign="center"
             maxW="3xl"
           >
-            {questionState.question}
+            {decode(removeMD(questionState.question))}
+            {questionState.choices &&
+              questionState.choices.map((x, index) => (
+                <Text>
+                  {' '}
+                  {String.fromCharCode(index + 1 + 64)}. {decode(removeMD(x))}{' '}
+                </Text>
+              ))}
           </Text>
           <Box textAlign="center">
             <Avatar src={questionState.user.photoUrl} mb={2} />
@@ -140,7 +149,7 @@ const CTASection = () => {
                     color: 'gray.300',
                   }}
                 >
-                  {removeMD(x.answer)}
+                  {decode(removeMD(x.answer))}
                 </chakra.p>
               </Box>
 
@@ -193,5 +202,6 @@ interface QuesionState {
     username: string;
     photoUrl: string;
   };
+  choices: string[];
   question: string;
 }
