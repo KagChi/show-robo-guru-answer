@@ -45,8 +45,8 @@ const CTASection = () => {
       });
 
       answerUpdate(
-        jsonResponse.props.pageProps.forumDetail
-          ? jsonResponse.props.pageProps.forumDetail.items.map(
+        props.forumDetail
+          ? props.forumDetail.items.map(
               (x: {
                 createdByUser: { username: string; photoUrl: string };
                 content: string;
